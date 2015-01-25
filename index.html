@@ -3,25 +3,36 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <title>Twittler Inc.</title>
   </head>
   <body>
+  <form>
+      <h1>Your Twittler Feed</h1>
+      <button type="submit">Get New Tweets!</button>
     <script>
 
       $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          index -= 1;
-        }
+        var $body = $('body');
+        //$body.html('');
+
+        var index = streams.home.length - 1; //index of all followed tweets
+
+       // $('button').on('click', function() {
+           //for (var i = 0; i < index; i++) {
+            while (index >= 0) {
+                var tweet = streams.home[index];
+                var $tweet = $('<div></div>');
+                $tweet.text('@' + tweet.user + ' ' + tweet.created_at + ': ' + tweet.message);
+                $tweet.appendTo($body);
+                index -= 1;
+            }
+       // });
+
 
       });
 
     </script>
+  </form>
   </body>
 </html>
