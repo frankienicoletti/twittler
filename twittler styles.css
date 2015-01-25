@@ -31,6 +31,7 @@ button {
     left: 55%;
     top:100px;
     width:40%;
+    background-color: aliceblue;
 }
 
 div.tweet-row {
@@ -41,7 +42,7 @@ div.tweet-row {
 
 span.user-button {
     font-weight: bold;
-    color: red;
+    color: crimson;
     cursor: pointer;
 }
 

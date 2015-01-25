@@ -7,16 +7,18 @@
     <title>Twittler Inc.</title>
   </head>
   <body>
-    <h1>Your Feed</h1>
+    <h1>Teh Twittler</h1>
     <div id="tweet-container"></div>
     <div id="subtweet-container"></div>
 
     <script>
         var baseIndex = 0;
+        var subtweet = false;
+        var subuser;
 
         function populateTweets () {
             var i;
-            for ( i=baseIndex;i<streams.home.length;i++) {
+            for (i=baseIndex;i<streams.home.length;i++) {
                 var tweet = streams.home[i];
                 var $tweet = $('<div class="tweet-row" style="display:none;"></div>');
                 $tweet.html('@<span class="user-button">' + tweet.user + '</span> ' + tweet.created_at + ': ' + tweet.message);
@@ -24,9 +26,8 @@
 
                 // Bind the username-click function to the username span
                 $tweet.find(".user-button").on('click',function() {
-
+                    $("#subtweet-container").html("");
                     var username = $(this).html();
-
                     userTweets(username);
                 });
 
@@ -37,24 +38,42 @@
         }
 
         function userTweets (username) {
-
-            $("#subtweet-container").html("");
-
-            console.log("loading user tweets: " + username);
             var i;
-            for (i=0;i<streams.users[username].length;i++) {
+            for (i in streams.users[username]) {
                 var tweet = streams.users[username][i];
                 var $tweet = $('<div class="tweet-row" style="display:none;"></div>');
-                $tweet.html("@" + tweet.user + ' ' + tweet.created_at + ': ' + tweet.message);
+                $tweet.html('@<span class="user-button">' + username + '</span> ' + tweet.created_at + ': ' + tweet.message);
                 $tweet.prependTo($('#subtweet-container'));
                 $tweet.slideDown();
             }
+            setTimeout(function(username) {
+                userTweets(username);
+            }, 1500);
+            subtweet = true;
+            subuser = username;
+
+        }
+
+        function updateSubtweets (username) {
+            setTimeout(userTweets, 1500);
         }
 
         $(document).ready(function(){
             populateTweets();
             setTimeout(populateTweets, 1500);
         });
+        if (subtweet) {
+            setTimeout(function (subuser) {
+                userTweets(subuser);
+            }, 1500);
+        }
+
+        for (var key in streams.users['shawndrost']) {
+            console.log(streams.users['shawndrost'][key]);
+        }
+
+
+
     </script>
   </body>
 </html>
