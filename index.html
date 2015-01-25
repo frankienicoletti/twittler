@@ -12,7 +12,65 @@
     <div id="subtweet-container"></div>
 
     <script>
-        var baseIndex = 0;
+
+ var baseIndex = 0;
+ var viewUser;
+
+
+ function populateTweets(tweetScope, username) {
+     var i;
+     var tweet;
+     var $tweet = $("<div class='tweet-row' style='display:none;'></div>");
+
+     if (tweetScope === 'main') {
+          for (i=baseIndex;i<streams.home.length;i++) {
+              tweet = streams.home[i];
+              $tweet.html("@ <span class='user-button'>" + tweet.user + "</span>" + tweet.created_at + ": " + tweet.message);
+              $tweet.prependTo($('#tweet-container'));
+              $tweet.slideDown();
+              //bind the username-click function to the username span
+              $tweet.find(".user-button").on('click',function() {
+                  $("#subtweet-container").html("");
+                  var username = $(this).html();
+                  viewUser = username;
+                  populateTweets('user', username);
+              });
+          }
+     } else if (tweetScope === 'user') {
+         for (i in streams.users[username]) {
+             tweet = streams.users[username][i];
+             $tweet.html("@ <span class='user-button'>" + username + "</span>" + tweet.created_at + ": " + tweet.message);
+             $tweet.prependTo($('#subtweet-container'));
+             $tweet.slideDown();
+         }
+     } else {
+         console.log("Scope must be main or user");
+     }
+
+     setTimeout(function() {
+         if (viewUser != undefined) {
+             populateTweets('user',viewUser);
+         } else {
+             populateTweets('main');
+         }
+     }, 1500);
+ }
+
+ $(document).ready(function(){
+     populateTweets('main');
+     setTimeout(function() {
+         if (viewUser != undefined) {
+             populateTweets('user',viewUser);
+         } else {
+             populateTweets('main');
+         }
+     }, 1500);
+ });
+
+
+/*
+ // old code below
+       // var baseIndex = 0;
         var subtweet = false;
         var subuser;
 
@@ -70,7 +128,7 @@
 
         for (var key in streams.users['shawndrost']) {
             console.log(streams.users['shawndrost'][key]);
-        }
+        } */
 
 
 
