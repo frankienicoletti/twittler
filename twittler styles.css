@@ -14,7 +14,8 @@ H1 {
     left: 20%;
     top:20%;
     width: 60%;
-    background-color: cyan;
+    background-color: aliceblue;
+    color: black;
 }
 
 #subtweet-container {
@@ -22,11 +23,11 @@ H1 {
     left: 20%;
     top:20%;
     width: 60%;
-    background-color: cyan;
+    background-color: cornflowerblue;
+    color: aliceblue;
 }
 
 div.tweet-row {
-    border: 1px solid #aaa;
     width:100%;
 }
 
