@@ -19,19 +19,37 @@ button {
     color: #ffffff;
 }
 
-div.tweet-box {
-    padding: 10px;
-    border: 1px solid #aaa;
-    width: 50%;
-    margin-left:auto;
-    margin-right:auto;
+#tweet-container {
+    position: absolute;
+    left: 5%;
+    top:100px;
+    width: 40%;
 }
 
-div.tweet-box:hover {
-    background-color: #eee;
+#subtweet-container {
+    position: absolute;
+    left: 55%;
+    top:100px;
+    width:40%;
+}
+
+div.tweet-row {
+    padding: 10px;
+    border: 1px solid #aaa;
+    width:100%;
 }
 
 span.user-button {
     font-weight: bold;
     color: red;
+    cursor: pointer;
+}
+
+span.user-button:hover {
+    text-decoration: underline;
+}
+
+div.user-tweets {
+    position: absolute;
+    left: 100px;
 }
