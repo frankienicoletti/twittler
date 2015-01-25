@@ -1,0 +1,37 @@
+body {
+    background-color: aliceblue;
+    font-family: sans-serif;
+}
+H1 {
+    font-family: sans-serif;
+}
+button {
+    background: #9ac0d9;
+    background-image: -webkit-linear-gradient(top, #9ac0d9, #366480);
+    background-image: -moz-linear-gradient(top, #9ac0d9, #366480);
+    background-image: -ms-linear-gradient(top, #9ac0d9, #366480);
+    background-image: -o-linear-gradient(top, #9ac0d9, #366480);
+    background-image: linear-gradient(to bottom, #9ac0d9, #366480);
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    font-family: sans-serif;
+    color: #ffffff;
+}
+
+div.tweet-box {
+    padding: 10px;
+    border: 1px solid #aaa;
+    width: 50%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+div.tweet-box:hover {
+    background-color: #eee;
+}
+
+span.user-button {
+    font-weight: bold;
+    color: red;
+}

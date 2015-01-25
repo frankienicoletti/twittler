@@ -3,36 +3,52 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <link rel="stylesheet" type="text/css" href="twittler%20styles.css">
     <title>Twittler Inc.</title>
   </head>
   <body>
-  <form>
-      <h1>Your Twittler Feed</h1>
-      <button type="submit">Get New Tweets!</button>
+    <h1>Your Feed</h1>
+    <div id="tweet-container"></div>
+
     <script>
+        var baseIndex = 0;
 
-      $(document).ready(function(){
-
-        var $body = $('body');
-        //$body.html('');
-
-        var index = streams.home.length - 1; //index of all followed tweets
-
-       // $('button').on('click', function() {
-           //for (var i = 0; i < index; i++) {
-            while (index >= 0) {
-                var tweet = streams.home[index];
-                var $tweet = $('<div></div>');
-                $tweet.text('@' + tweet.user + ' ' + tweet.created_at + ': ' + tweet.message);
-                $tweet.appendTo($body);
-                index -= 1;
+        function populateTweets () {
+            var i;
+            for ( i=baseIndex;i<streams.home.length;i++) {
+                var tweet = streams.home[i];
+                var $tweet = $('<div class="tweet-box" style="display:none;"></div>');
+                $tweet.html('<span class="user-button">@' + tweet.user + '</span> ' + tweet.created_at + ': ' + tweet.message);
+                $tweet.prependTo($('#tweet-container'));
+                $tweet.slideDown();
             }
-       // });
+            baseIndex = i;
+            setTimeout(populateTweets,1500);
+        }
 
+        function userTweets (user) {
+            var i;
+            for (i=baseIndex;i<streams.home.user.length;i++) {
+                var tweet = streams.home[user][i];
+                var $tweet = $('<div class="user-tweets" style="display:none;"></div>div>');
+                $tweet.html('@' + tweet.user + '</span> ' + tweet.created_at + ': ' + tweet.message);
+                $tweet.prependTo($('tweet-container'));
+                $tweet.slideDown();
+            }
+        }
 
-      });
+        $(document).ready(function(){
+            populateTweets();
+            $('#refresh-button').on('click', function () {
+                populateTweets();
+            });
+            setTimeout(populateTweets, 1500);
 
+            $('#user-button').on('click', function(user) {
+                $('#tweet-container').html("");
+                userTweets(user);
+            });
+        });
     </script>
-  </form>
   </body>
 </html>
