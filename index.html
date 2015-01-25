@@ -14,18 +14,18 @@
     <script>
 
  var baseIndex = 0;
+ var subIndex = 0;
  var viewUser;
-
+ var i, x;
 
  function populateTweets(tweetScope, username) {
-     var i;
      var tweet;
      var $tweet = $("<div class='tweet-row' style='display:none;'></div>");
 
      if (tweetScope === 'main') {
-          for (i=baseIndex;i<streams.home.length;i++) {
+         for (i=baseIndex;i<streams.home.length;i++) {
               tweet = streams.home[i];
-              $tweet.html("@ <span class='user-button'>" + tweet.user + "</span>" + tweet.created_at + ": " + tweet.message);
+              $tweet.html("@<span class='user-button'>" + tweet.user + "</span> " + tweet.created_at + ": " + tweet.message);
               $tweet.prependTo($('#tweet-container'));
               $tweet.slideDown();
               //bind the username-click function to the username span
@@ -35,14 +35,17 @@
                   viewUser = username;
                   populateTweets('user', username);
               });
-          }
+         }
+         baseIndex = i;
      } else if (tweetScope === 'user') {
-         for (i in streams.users[username]) {
-             tweet = streams.users[username][i];
-             $tweet.html("@ <span class='user-button'>" + username + "</span>" + tweet.created_at + ": " + tweet.message);
+         $("#tweet-container").html("");
+         for (var x=subIndex;x<streams.users[username].length; x++) {
+             tweet = streams.users[username][x];
+             $tweet.html("@<span class='user-button'>" + username + "</span> " + tweet.created_at + ": " + tweet.message);
              $tweet.prependTo($('#subtweet-container'));
              $tweet.slideDown();
          }
+         subIndex = x;
      } else {
          console.log("Scope must be main or user");
      }
@@ -66,70 +69,6 @@
          }
      }, 1500);
  });
-
-
-/*
- // old code below
-       // var baseIndex = 0;
-        var subtweet = false;
-        var subuser;
-
-        function populateTweets () {
-            var i;
-            for (i=baseIndex;i<streams.home.length;i++) {
-                var tweet = streams.home[i];
-                var $tweet = $('<div class="tweet-row" style="display:none;"></div>');
-                $tweet.html('@<span class="user-button">' + tweet.user + '</span> ' + tweet.created_at + ': ' + tweet.message);
-                $tweet.prependTo($('#tweet-container'));
-
-                // Bind the username-click function to the username span
-                $tweet.find(".user-button").on('click',function() {
-                    $("#subtweet-container").html("");
-                    var username = $(this).html();
-                    userTweets(username);
-                });
-
-                $tweet.slideDown();
-            }
-            baseIndex = i;
-            setTimeout(populateTweets,1500);
-        }
-
-        function userTweets (username) {
-            var i;
-            for (i in streams.users[username]) {
-                var tweet = streams.users[username][i];
-                var $tweet = $('<div class="tweet-row" style="display:none;"></div>');
-                $tweet.html('@<span class="user-button">' + username + '</span> ' + tweet.created_at + ': ' + tweet.message);
-                $tweet.prependTo($('#subtweet-container'));
-                $tweet.slideDown();
-            }
-            setTimeout(function(username) {
-                userTweets(username);
-            }, 1500);
-            subtweet = true;
-            subuser = username;
-
-        }
-
-        function updateSubtweets (username) {
-            setTimeout(userTweets, 1500);
-        }
-
-        $(document).ready(function(){
-            populateTweets();
-            setTimeout(populateTweets, 1500);
-        });
-        if (subtweet) {
-            setTimeout(function (subuser) {
-                userTweets(subuser);
-            }, 1500);
-        }
-
-        for (var key in streams.users['shawndrost']) {
-            console.log(streams.users['shawndrost'][key]);
-        } */
-
 
 
     </script>

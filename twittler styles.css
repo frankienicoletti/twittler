@@ -4,38 +4,28 @@ body {
 }
 H1 {
     font-family: sans-serif;
-}
-button {
-    background: #9ac0d9;
-    background-image: -webkit-linear-gradient(top, #9ac0d9, #366480);
-    background-image: -moz-linear-gradient(top, #9ac0d9, #366480);
-    background-image: -ms-linear-gradient(top, #9ac0d9, #366480);
-    background-image: -o-linear-gradient(top, #9ac0d9, #366480);
-    background-image: linear-gradient(to bottom, #9ac0d9, #366480);
-    -webkit-border-radius: 28;
-    -moz-border-radius: 28;
-    border-radius: 28px;
-    font-family: sans-serif;
-    color: #ffffff;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #tweet-container {
     position: absolute;
-    left: 5%;
-    top:100px;
-    width: 40%;
+    left: 20%;
+    top:20%;
+    width: 60%;
+    background-color: cyan;
 }
 
 #subtweet-container {
     position: absolute;
-    left: 55%;
-    top:100px;
-    width:40%;
-    background-color: aliceblue;
+    left: 20%;
+    top:20%;
+    width: 60%;
+    background-color: cyan;
 }
 
 div.tweet-row {
-    padding: 10px;
     border: 1px solid #aaa;
     width:100%;
 }
@@ -48,9 +38,4 @@ span.user-button {
 
 span.user-button:hover {
     text-decoration: underline;
-}
-
-div.user-tweets {
-    position: absolute;
-    left: 100px;
 }
